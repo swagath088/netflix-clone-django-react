@@ -1,0 +1,116 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.loginn{
+    border: 2px solid black;
+    width: 30vw;
+    height: 60vh;
+    position: absolute;
+    left: 40vw;
+    top: 15vh;
+    background-color: rgba(11, 11, 11, 0.781);
+    color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+}
+.loginn h1{
+    text-align: center;
+    color: red;
+    font-size: xx-large;
+    font-style: italic;
+    font-weight: bolder;
+    position: relative;
+    top: 3vh;
+}
+.mainone{
+     background-image: url('images/netflix.jpg');
+    width: 100vw;
+    height: 100vh;
+}
+.loginn h3{
+    position: relative;
+    top: 2vh;
+    left: 2vw;
+    font-size: xx-large;
+    color: whitesmoke;
+}
+.loginn input[type=text]{
+    width: 25vw;
+    height: 5vh;
+    position: relative;
+    left: 2vw;
+    top: 1vh;
+    background-color: rgba(11, 11, 11, 0.781);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    font-size: larger;
+}
+.loginn input[type=password]{
+    width: 25vw;
+    height: 5vh;
+    position: relative;
+    left: 2vw;
+    top: 1vh;
+    background-color: rgba(11, 11, 11, 0.781);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    font-size: larger;
+}
+.loginn button{
+    width: 25vw;
+    height: 5vh;
+    position: relative;
+    top: 3vh;
+    left: 2vw;
+    background-color: rgb(221, 55, 55);
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+}
+.loginn .forgot{
+    position: relative;
+    top: 4vh;
+    left: 11vw;
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: larger;
+}
+.loginn hr{
+    position: relative;
+    top: 6vh;
+    color: whitesmoke;
+}
+.loginn p{
+    position: relative;
+    top: 5vh;
+    left: 14vw;
+    color: grey;
+}
+.loginn h5{
+    position: relative;
+    top: 7vh;
+    color: grey;
+    font-size: large;
+}
+.loginn .register{
+    position: relative;
+    top: 4vh;
+    left: 8vw;
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: x-large;
+
+}
+.loginn .link{
+    text-decoration: none;
+    color: white;
+    position: relative;
+    top: 4vh;
+    left: 8vw;
+    font-size: x-large;
+}

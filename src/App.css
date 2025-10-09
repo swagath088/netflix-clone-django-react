@@ -1,0 +1,41 @@
+
+
+.container{
+    display: grid;
+    grid-template-columns: 8vw 1fr;
+    grid-template-areas: 
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+.container .heading{
+    grid-area: header;
+    height: 5vh;
+    width: 100vw;
+    background-color: black;
+    color:whitesmoke
+}
+.container .sidebar{
+    grid-area: sidebar;
+    width: 100%;
+    height: 113vh;
+    background-color: black;
+    color: whitesmoke;
+}
+.container .mainpage{
+    grid-area: main;
+    text-align: center;
+    width: 100%;
+    height: 120vh;
+    background-color: black;
+    color: white;
+}
+.container .foot{
+    grid-area: footer;
+    height: 3vh;
+    width: 100vw;
+    text-align: center;
+    background-color: black;
+    color: grey;
+    font-size:x-small ;
+}
