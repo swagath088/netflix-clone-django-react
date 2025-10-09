@@ -1,0 +1,58 @@
+.modify .movie{
+    width: 25vw;
+    height: 5vh;
+    background-color:rgb(35, 35, 35);
+    position: absolute;
+    top: 2vh;
+    left: 30vw;
+    border: 2px solid black;
+}
+.modify .searchmovie img{
+    width: 3vw;
+    height: 5vh;
+    position: absolute;
+    top: 2vh;
+    left: 56vw;
+    border: 2px solid black;
+}
+.modify .movie input[type=text]:focus{
+    border: 2px solid orange;
+}
+.modify .desc{
+    width: 25vw;
+    height: 4vh;
+    margin: 2vh;
+   position: relative;
+   top: 9vh;
+   border-radius: 5px;
+   background-color:rgb(35, 35, 35);
+   color: white;
+   border: none;
+
+}
+.modify .update{
+    width: 7vw;
+    height: 5vh;
+    position: relative;
+    top: 12vh;
+    border-radius: 5px;
+    background-color:rgb(35, 35, 35);
+    color: white;
+    border: none;
+    background-color: blue;
+}
+.modify .delete{
+    width: 7vw;
+    height: 5vh;
+    position: relative;
+    top: 13vh;
+    border-radius: 5px;
+    background-color:red;
+    color: white;
+    border: none;
+}
+.modify .movieimg{
+    position: absolute;
+    left: 60vw;
+    top: 10vh;
+}
