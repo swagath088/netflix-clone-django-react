@@ -1,0 +1,159 @@
+
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.login {
+    background-image: url('images/signpage.jpg');
+    width: 100vw;
+    height: 100vh;
+}
+.main{
+    border: 2px solid black;
+    background-color: rgba(11, 11, 11, 0.781);
+    color:  white;
+    height: 78vh;
+    width: 30vw;
+    position: absolute;
+    top: 10vh;
+    left: 40vw;
+    border: none;
+    border-radius: 10px;
+}
+.main input[type=text]{
+    height: 5vh;
+    width: 25vw;
+    margin-top: 10px;
+    color: whitesmoke;
+    text-align: center;
+}
+.main input[type=password]{
+    height: 5vh;
+    width: 25vw;
+    margin-top: 10px;
+    color: whitesmoke;
+    text-align: center;
+}
+.main input[type=email]{
+    height: 5vh;
+    width: 25vw;
+    margin-top: 10px;
+    color: whitesmoke;
+    text-align: center;
+}
+.one{
+    position: absolute;
+    left: 2vw;
+    top: 13vh;
+    font-size: large;
+    background-color: rgba(11, 11, 11, 0.781);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    color: whitesmoke;
+}
+.two{
+    position: absolute;
+    left: 2vw;
+    top: 20vh;
+    font-size: large;
+    background-color: rgba(11, 11, 11, 0.781);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    text-align: center;
+    
+}
+.email{
+    position: absolute;
+    left: 2vw;
+    top: 27vh;
+    font-size: large;
+    background-color: rgba(11, 11, 11, 0.781);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    text-align: center;
+}
+.main button{
+    position: absolute;
+    left: 2vw;
+    top: 35vh;
+    height: 5vh;
+    width: 25vw;
+    background-color: rgb(243, 62, 62);
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    font-size: x-large;
+}
+.head{
+    position: absolute;
+    top: 7vh;
+    left: 2vw;
+    color: whitesmoke;
+}
+.main a{
+    position: absolute;
+    top: 41vh;
+    left: 11vw;
+    color: whitesmoke;
+    font-size: large;
+}
+.main hr{
+   position: relative;
+   top: 21vh;
+}
+.or{
+    position: absolute;
+    top: 46vh;
+    left: 14vw;
+    font-size: larger;
+    color: grey;
+}
+.sign h4{
+    position: absolute;
+    top: 51vh;
+    left: 1vw;
+    font-size: large;
+    color: grey;
+}
+.sign a{
+    position: absolute;
+    top: 50vh;
+    left: 14vw;
+    font-size: x-large;
+    color: whitesmoke;
+    text-decoration: none;
+
+}
+.p{
+    position: absolute;
+    top: 58vh;
+    left: 1vw;
+    font-size: large;
+    color: grey;
+}
+.one::placeholder{
+    color: whitesmoke;
+    opacity: 1;
+}
+.two::placeholder{
+    color: whitesmoke;
+    opacity: 1;
+}
+.email::placeholder{
+    color: whitesmoke;
+    opacity: 1;
+}
+.netflix{
+    text-align: center;
+    color: red;
+    font-style: oblique;
+}
+.item{
+    position: relative;
+    top: 8vh;
+    left: 4vw;
+    font-size: x-large;
+}
