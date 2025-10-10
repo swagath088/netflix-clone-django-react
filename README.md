@@ -1,41 +1,85 @@
-# Netflix Clone Frontend
+Netflix Clone Frontend (React)
 
-This is the **frontend** of a Netflix Clone project built with **React, Vite, and Axios**.
+This is the frontend for a Netflix Clone application, built using React. It consumes the Django REST API backend and displays movies, images, and videos.
 
-## Features
+Features
 
-- **User Authentication**
-  - Register, login, logout
-  - Superuser privileges for adding, modifying, or deleting movies
-- **Movie Browsing**
-  - All movies, categorized sections: Action, Thriller, Web Series
-  - Search bar to quickly find movies
-- **Movie Details**
-  - View detailed information about each movie
-  - Play trailers or videos within the app
-- **Admin Features**
-  - Superuser can add, modify, and delete movies
-  - Manage all content directly from the frontend interface
-- **Responsive Design**
-  - Works on desktop and mobile
+User Authentication
 
-## Tech Stack
+Login and logout using backend API
 
-- **Frontend:** React, Vite, Axios, React Router
-- **Styling:** CSS Modules
-- **Video Playback:** React Player
+Conditional rendering based on superuser status
 
-## Installation & Setup
+Movie Management
 
-### Prerequisites
-- Node.js
-- npm
-- Backend running (Django REST API)
+Browse all movies
 
-### Steps
+Play video trailers
 
-1. Clone the repository:
+Display movie images
 
-```bash
+Admin Features
+
+Superuser can access admin-only pages (via backend)
+
+Tech Stack
+
+Frontend: React, React Router
+
+State Management: useState, useEffect
+
+Styling: CSS
+
+Media Handling: HTML5 video and image tags
+
+API Requests: Axios
+
+Prerequisites
+
+Node.js 20+
+
+NPM or Yarn
+
+Backend running locally (or deployed)
+
+Setup Instructions
+1. Clone the repository
 git clone https://github.com/swagath088/netflix-clone-django-react.git
 cd netflix-clone-django-react
+2. Install dependencies
+npm install
+# or
+yarn install
+
+3. Add sample media
+
+Add small sample media to demonstrate the app:
+
+media_sample/
+├── images/
+│   └── sample.jpg
+└── movies/
+    └── sample.mp4
+
+
+images/sample.jpg → example movie poster
+
+movies/sample.mp4 → example trailer video
+
+4. Run the frontend
+npm start
+# or
+yarn start
+
+
+App runs on: http://localhost:3000
+
+Connects to backend API at: http://127.0.0.1:8000
+
+5. Notes
+
+Ensure your backend server is running before starting the frontend.
+
+Only include sample media to demonstrate functionality; do not upload full movie files.
+
+The frontend reads images and videos from the media_sample folder.
