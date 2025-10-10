@@ -13,10 +13,10 @@ function Header(){
     }
     return(
         <header className="heading">
-            <button className="image"><img src="/images/netflixlogo.jpg" alt="" /></button>
+            <button className="image"><img src="/netflix-clone-django-react/images/netflixlogo.jpg" alt="" /> </button>
             <input type="text" name="" id="" placeholder='search movie' onChange={(e)=>setsearchid(e.target.value)} />
-            <button className="search"><img src="/images/searchlogo.jpg" alt=""  onClick={value}/></button>
-            <button className="logo"  onClick={val}><img src="/images/you.jpg" alt=""/></button>
+            <button className="search"><img src="/netflix-clone-django-react/images/searchlogo.jpg" alt=""  onClick={value}/></button>
+            <button className="logo"  onClick={val}><img src="/netflix-clone-django-react/images/you.jpg"alt=""/></button>
         </header>
     );
 }

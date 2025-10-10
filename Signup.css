@@ -4,7 +4,8 @@
     margin: 0px;
 }
 .login {
-    background-image: url('images/signpage.jpg');
+    background-image: url('/netflix-clone-django-react/images/signpage.jpg');
+
     width: 100vw;
     height: 100vh;
 }
