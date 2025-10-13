@@ -3,6 +3,8 @@ import Login from './Login';
 import { Link } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import axios from 'axios';
+import '../css/Signup.css';
+
 function Signup(){
     let uname=useRef();
     let pwd=useRef();
