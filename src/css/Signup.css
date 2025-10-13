@@ -1,221 +1,141 @@
-/* ====================== */
-/* Original Signup CSS */
-/* ====================== */
 *{
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
 }
+
+/* Background for signup page */
 .login {
     background-image: url('images/signpage.jpg');
     width: 100vw;
     height: 100vh;
+    background-size: cover;
+    background-position: center;
 }
+
+/* Main form container */
 .main{
     border: 2px solid black;
     background-color: rgba(11, 11, 11, 0.781);
-    color:  white;
+    color: white;
     height: 78vh;
     width: 30vw;
     position: absolute;
     top: 10vh;
-    left: 40vw;
-    border: none;
+    left: 35%;
     border-radius: 10px;
+    padding: 2vh 2vw;
 }
-.main input[type=text]{
-    height: 5vh;
-    width: 25vw;
-    margin-top: 10px;
+
+/* Headings */
+.head{
     color: whitesmoke;
     text-align: center;
+    font-size: xx-large;
+    margin-bottom: 3vh;
 }
-.main input[type=password]{
-    height: 5vh;
-    width: 25vw;
-    margin-top: 10px;
-    color: whitesmoke;
-    text-align: center;
-}
+
+/* Inputs */
+.main input[type=text],
+.main input[type=password],
 .main input[type=email]{
     height: 5vh;
-    width: 25vw;
-    margin-top: 10px;
+    width: 90%;
+    margin: 1vh auto;
+    display: block;
     color: whitesmoke;
     text-align: center;
-}
-.one{
-    position: absolute;
-    left: 2vw;
-    top: 13vh;
-    font-size: large;
     background-color: rgba(11, 11, 11, 0.781);
-    border: none;
     border-radius: 5px;
-    text-align: center;
+    border: none;
+    font-size: large;
+}
+
+.main input::placeholder{
     color: whitesmoke;
+    opacity: 1;
 }
-.two{
-    position: absolute;
-    left: 2vw;
-    top: 20vh;
-    font-size: large;
-    background-color: rgba(11, 11, 11, 0.781);
-    border-radius: 5px;
-    border: none;
-    color: white;
-    text-align: center;
-}
-.email{
-    position: absolute;
-    left: 2vw;
-    top: 27vh;
-    font-size: large;
-    background-color: rgba(11, 11, 11, 0.781);
-    border-radius: 5px;
-    border: none;
-    color: white;
-    text-align: center;
-}
+
+/* Button */
 .main button{
-    position: absolute;
-    left: 2vw;
-    top: 35vh;
     height: 5vh;
-    width: 25vw;
+    width: 95%;
+    margin: 2vh auto;
+    display: block;
     background-color: rgb(243, 62, 62);
     color: whitesmoke;
     border: none;
     border-radius: 5px;
     font-size: x-large;
+    cursor: pointer;
 }
-.head{
-    position: absolute;
-    top: 7vh;
-    left: 2vw;
-    color: whitesmoke;
-}
+
+/* Links and text */
 .main a{
-    position: absolute;
-    top: 41vh;
-    left: 11vw;
+    display: block;
+    text-align: center;
+    margin-top: 2vh;
     color: whitesmoke;
     font-size: large;
-}
-.main hr{
-   position: relative;
-   top: 21vh;
-}
-.or{
-    position: absolute;
-    top: 46vh;
-    left: 14vw;
-    font-size: larger;
-    color: grey;
-}
-.sign h4{
-    position: absolute;
-    top: 51vh;
-    left: 1vw;
-    font-size: large;
-    color: grey;
-}
-.sign a{
-    position: absolute;
-    top: 50vh;
-    left: 14vw;
-    font-size: x-large;
-    color: whitesmoke;
     text-decoration: none;
 }
-.p{
-    position: absolute;
-    top: 58vh;
-    left: 1vw;
-    font-size: large;
-    color: grey;
-}
-.one::placeholder{
-    color: whitesmoke;
-    opacity: 1;
-}
-.two::placeholder{
-    color: whitesmoke;
-    opacity: 1;
-}
-.email::placeholder{
-    color: whitesmoke;
-    opacity: 1;
-}
-.netflix{
+
+.or{
     text-align: center;
-    color: red;
-    font-style: oblique;
+    font-size: larger;
+    color: grey;
+    margin: 3vh 0;
 }
+
+.sign h4, .sign a{
+    display: block;
+    text-align: center;
+    color: grey;
+    font-size: large;
+    margin-top: 1vh;
+}
+
+.p{
+    text-align: center;
+    color: grey;
+    font-size: large;
+    margin-top: 2vh;
+}
+
 .item{
-    position: relative;
-    top: 8vh;
-    left: 4vw;
+    text-align: center;
+    color: white;
+    margin-top: 2vh;
     font-size: x-large;
 }
 
-/* ====================== */
-/* Responsive Media Queries */
-/* ====================== */
-@media screen and (max-width: 768px) {
-    .main {
-        width: 80vw;
-        left: 10vw;
-        height: auto;
-        top: 10vh;
-        padding: 20px;
-    }
-
-    .main input[type=text],
-    .main input[type=password],
-    .main input[type=email],
-    .main button {
+/* Responsive Design for small screens */
+@media screen and (max-width: 768px){
+    .main{
         width: 90%;
-        left: 5%;
-        font-size: 1rem;
-    }
-
-    .head,
-    .or,
-    .sign h4,
-    .sign a,
-    .p,
-    .item {
-        left: 0;
-        font-size: medium;
-        text-align: center;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .main {
-        width: 90vw;
-        left: 5vw;
+        height: auto;
         top: 5vh;
-        padding: 15px;
+        left: 5%;
+        padding: 4vh 5vw;
     }
 
     .main input[type=text],
     .main input[type=password],
-    .main input[type=email],
-    .main button {
-        width: 100%;
-        left: 0;
-        font-size: 0.9rem;
+    .main input[type=email]{
+        width: 95%;
+        font-size: medium;
     }
 
-    .head,
-    .or,
-    .sign h4,
-    .sign a,
-    .p,
-    .item {
-        left: 0;
-        font-size: small;
-        text-align: center;
+    .main button{
+        width: 100%;
+        font-size: large;
+    }
+
+    .head{
+        font-size: x-large;
+    }
+
+    .or, .sign h4, .sign a, .p, .item{
+        font-size: medium;
     }
 }
