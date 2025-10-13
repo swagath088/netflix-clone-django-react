@@ -1,8 +1,25 @@
-
-.mainpage .page{
+/* ====================== */
+/* Original Mainpage CSS */
+/* ====================== */
+.mainpage {
+    width: 100vw;
+}
+.mainpage .page {
     position: relative;
     top: 10vh;
 }
-.mainpage{
-    width: 100vw;
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 1024px) {
+    .mainpage .page {
+        top: 8vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mainpage .page {
+        top: 6vh;
+    }
 }

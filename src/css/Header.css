@@ -1,4 +1,6 @@
-
+/* ====================== */
+/* Original Heading CSS */
+/* ====================== */
 .heading .image{
     border: 3px solid black;
     box-sizing: border-box;
@@ -6,7 +8,6 @@
     width: 10vw;
     position: absolute;
     top: 2vh;
-    
 }
 .heading .image img{
     height: 100%;
@@ -19,28 +20,24 @@
     color: whitesmoke;
     border: 2px solid black;
     border-radius: 10px;
-    background-color:rgb(35, 35, 35);
+    background-color: rgb(35, 35, 35);
     position: absolute;
     left: 35vw;
     top: 2vh;
     margin: 0px;
     padding: 0px;
     font-size: large;
-
 }
 .heading .search{
     width: 3vw;
     height: 5vh;
-    position: relative;
+    position: absolute;
     left: 70vw;
+    top: 2vh;
     box-sizing: border-box;
     border: 1px solid black;
-    position: relative;
-    top: 2vh;
     border-radius: 10px;
-
 }
-
 .heading .logo{
     width: 5vw;
     height: 5vh;
@@ -65,7 +62,6 @@
     box-sizing: border-box;
     border: 2px solid black;
     border-radius: 5px;
-
 }
 .heading input[type=text]::placeholder{
     color: white;
@@ -75,4 +71,56 @@
 .heading input[type=text]:focus{
     border: 1px solid orange;
     outline: none;
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 1024px) {
+    .heading .image {
+        width: 12vw;
+        height: 6vh;
+    }
+    .heading input[type=text] {
+        width: 50vw;
+        left: 30vw;
+        font-size: medium;
+    }
+    .heading .search {
+        width: 4vw;
+        height: 6vh;
+        left: 80vw;
+    }
+    .heading .logo {
+        width: 6vw;
+        height: 6vh;
+        left: 90vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .heading .image {
+        width: 20vw;
+        height: 6vh;
+        top: 1vh;
+        left: 2vw;
+    }
+    .heading input[type=text] {
+        width: 55vw;
+        left: 25vw;
+        top: 1vh;
+        font-size: small;
+    }
+    .heading .search {
+        width: 6vw;
+        height: 6vh;
+        left: 82vw;
+        top: 1vh;
+    }
+    .heading .logo {
+        width: 8vw;
+        height: 6vh;
+        left: 90vw;
+        top: 1vh;
+    }
 }

@@ -1,4 +1,6 @@
-
+/* ====================== */
+/* Original Log CSS */
+/* ====================== */
 .log{
     background-color: black;
     color: white;
@@ -18,4 +20,37 @@
 .log h2{
     position: relative;
     top:17vh;
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 1024px) {
+    .log {
+        font-size: x-large;
+    }
+    .log button {
+        width: 8vw;
+        height: 6vh;
+        top: 25vh;
+    }
+    .log h2 {
+        top: 15vh;
+        font-size: large;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .log {
+        font-size: large;
+    }
+    .log button {
+        width: 15vw;
+        height: 7vh;
+        top: 20vh;
+    }
+    .log h2 {
+        top: 12vh;
+        font-size: medium;
+    }
 }

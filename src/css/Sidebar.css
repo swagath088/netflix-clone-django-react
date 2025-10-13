@@ -1,21 +1,48 @@
+/* ====================== */
+/* Original Sidebar CSS */
+/* ====================== */
 .sidebar ul li{
     font-size: x-large;
     margin-top: 10vh;
 }
 .sidebar-btn {
-  display: block;      
-  padding: 10px 20px;
-  margin: 5px 0;
-  background-color:black;
-  color: white;          
-  text-decoration: none;   
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s;
+    display: block;      
+    padding: 10px 20px;
+    margin: 5px 0;
+    background-color: black;
+    color: white;          
+    text-decoration: none;   
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .sidebar-btn:hover {
-  background-color: #0056b3; 
+    background-color: #0056b3; 
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 1024px) {
+    .sidebar ul li {
+        font-size: large;
+        margin-top: 8vh;
+    }
+    .sidebar-btn {
+        padding: 8px 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar ul li {
+        font-size: medium;
+        margin-top: 5vh;
+    }
+    .sidebar-btn {
+        padding: 6px 12px;
+        font-size: small;
+    }
 }

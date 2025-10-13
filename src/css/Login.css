@@ -1,3 +1,6 @@
+/* ====================== */
+/* Original Login CSS */
+/* ====================== */
 *{
     padding: 0px;
     margin: 0px;
@@ -104,7 +107,6 @@
     color: whitesmoke;
     text-decoration: none;
     font-size: x-large;
-
 }
 .loginn .link{
     text-decoration: none;
@@ -113,4 +115,84 @@
     top: 4vh;
     left: 8vw;
     font-size: x-large;
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 768px) {
+    .loginn {
+        width: 80vw;
+        left: 10vw;
+        height: auto;
+        top: 10vh;
+        padding: 20px;
+    }
+
+    .loginn h1 {
+        font-size: 2rem;
+        top: 0;
+    }
+
+    .loginn h3 {
+        font-size: 1.5rem;
+        top: 0;
+        left: 0;
+    }
+
+    .loginn input[type=text],
+    .loginn input[type=password],
+    .loginn button {
+        width: 90%;
+        left: 5%;
+        font-size: 1rem;
+    }
+
+    .loginn .forgot,
+    .loginn .register,
+    .loginn .link {
+        font-size: medium;
+        left: 0;
+    }
+
+    .loginn p,
+    .loginn h5 {
+        left: 0;
+    }
+
+    .loginn hr {
+        top: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .loginn {
+        width: 90vw;
+        left: 5vw;
+        top: 5vh;
+        padding: 15px;
+    }
+
+    .loginn h1 {
+        font-size: 1.5rem;
+    }
+
+    .loginn h3 {
+        font-size: 1.2rem;
+    }
+
+    .loginn input[type=text],
+    .loginn input[type=password],
+    .loginn button {
+        width: 100%;
+        left: 0;
+        font-size: 0.9rem;
+    }
+
+    .loginn .forgot,
+    .loginn .register,
+    .loginn .link {
+        font-size: small;
+        left: 0;
+    }
 }

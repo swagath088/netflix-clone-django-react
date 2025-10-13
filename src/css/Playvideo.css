@@ -1,4 +1,24 @@
+/* ====================== */
+/* Original Video CSS */
+/* ====================== */
 .video video{
     width: 40vw;
     height: 50vh;
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 1024px) {
+    .video video {
+        width: 60vw;
+        height: 45vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .video video {
+        width: 90vw;
+        height: 40vh;
+    }
 }

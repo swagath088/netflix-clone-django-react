@@ -1,12 +1,42 @@
+/* ====================== */
+/* Original ImageOne CSS */
+/* ====================== */
 .imageone{
     display: inline-block;
     width: 100%;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 1vw; /* optional spacing between images */
 }
 
 .imageone img{
     width: 27vw;
-    height:35vh;
+    height: 35vh;
+    object-fit: cover; /* ensures image scales nicely */
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 1024px) {
+    .imageone {
+        grid-template-columns: 1fr 1fr; /* 2 columns on tablets */
+    }
+    .imageone img {
+        width: 45vw;
+        height: 30vh;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .imageone {
+        grid-template-columns: 1fr; /* single column on mobiles */
+        gap: 2vh;
+    }
+    .imageone img {
+        width: 90%;
+        height: auto;
+        margin: 0 auto;
+    }
 }

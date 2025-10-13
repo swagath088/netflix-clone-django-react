@@ -1,3 +1,6 @@
+/* ====================== */
+/* Original Movie CSS */
+/* ====================== */
 .movie input[type=text]{
     width: 30vw;
     height: 5vh;
@@ -7,7 +10,6 @@
     border-radius: 5px;
     font-size: x-large;
     border: 2px solid black;
-    
 }
 .movie input[type=file]{
     width: 20vw;
@@ -18,7 +20,6 @@
     border-radius: 5px;
     font-size: x-large;
     border: 2px solid black;
-    
 }
 .movie{
     font-size: larger;
@@ -31,4 +32,41 @@
     color:black;
     font-size: large;
     border: 2px solid black;
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 768px) {
+    .movie input[type=text] {
+        width: 80%;
+        font-size: large;
+        margin: 1.5vh 0;
+    }
+    .movie input[type=file] {
+        width: 60%;
+        font-size: large;
+        margin: 1.5vh 0;
+    }
+    .movie button {
+        width: 50%;
+        font-size: medium;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .movie input[type=text] {
+        width: 90%;
+        font-size: medium;
+        margin: 1vh 0;
+    }
+    .movie input[type=file] {
+        width: 80%;
+        font-size: medium;
+        margin: 1vh 0;
+    }
+    .movie button {
+        width: 70%;
+        font-size: small;
+    }
 }

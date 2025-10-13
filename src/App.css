@@ -1,19 +1,20 @@
-
-
+/* ====================== */
+/* Original Container CSS */
+/* ====================== */
 .container{
     display: grid;
     grid-template-columns: 8vw 1fr;
     grid-template-areas: 
-    "header header"
-    "sidebar main"
-    "footer footer";
+        "header header"
+        "sidebar main"
+        "footer footer";
 }
 .container .heading{
     grid-area: header;
     height: 5vh;
     width: 100vw;
     background-color: black;
-    color:whitesmoke
+    color: whitesmoke;
 }
 .container .sidebar{
     grid-area: sidebar;
@@ -37,5 +38,47 @@
     text-align: center;
     background-color: black;
     color: grey;
-    font-size:x-small ;
+    font-size: x-small;
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 1024px) {
+    .container {
+        grid-template-columns: 15vw 1fr;
+    }
+    .container .sidebar {
+        height: auto;
+    }
+    .container .mainpage {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "main"
+            "sidebar"
+            "footer";
+    }
+    .container .heading {
+        height: 6vh;
+        font-size: large;
+    }
+    .container .sidebar {
+        height: auto;
+        width: 100%;
+    }
+    .container .mainpage {
+        height: auto;
+        width: 100%;
+    }
+    .container .foot {
+        height: auto;
+        font-size: smaller;
+    }
 }

@@ -1,4 +1,6 @@
-
+/* ====================== */
+/* Original Signup CSS */
+/* ====================== */
 *{
     padding: 0px;
     margin: 0px;
@@ -62,7 +64,6 @@
     border: none;
     color: white;
     text-align: center;
-    
 }
 .email{
     position: absolute;
@@ -125,7 +126,6 @@
     font-size: x-large;
     color: whitesmoke;
     text-decoration: none;
-
 }
 .p{
     position: absolute;
@@ -156,4 +156,66 @@
     top: 8vh;
     left: 4vw;
     font-size: x-large;
+}
+
+/* ====================== */
+/* Responsive Media Queries */
+/* ====================== */
+@media screen and (max-width: 768px) {
+    .main {
+        width: 80vw;
+        left: 10vw;
+        height: auto;
+        top: 10vh;
+        padding: 20px;
+    }
+
+    .main input[type=text],
+    .main input[type=password],
+    .main input[type=email],
+    .main button {
+        width: 90%;
+        left: 5%;
+        font-size: 1rem;
+    }
+
+    .head,
+    .or,
+    .sign h4,
+    .sign a,
+    .p,
+    .item {
+        left: 0;
+        font-size: medium;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .main {
+        width: 90vw;
+        left: 5vw;
+        top: 5vh;
+        padding: 15px;
+    }
+
+    .main input[type=text],
+    .main input[type=password],
+    .main input[type=email],
+    .main button {
+        width: 100%;
+        left: 0;
+        font-size: 0.9rem;
+    }
+
+    .head,
+    .or,
+    .sign h4,
+    .sign a,
+    .p,
+    .item {
+        left: 0;
+        font-size: small;
+        text-align: center;
+    }
 }
