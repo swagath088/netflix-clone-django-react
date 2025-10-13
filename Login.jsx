@@ -1,61 +1,68 @@
 import { useRef } from 'react';
-import '../css/Login.css'
-import {  Link, useNavigate } from 'react-router-dom';
+import '../css/Login.css';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import App from '../App';
-function Login({setUser}){
-    let navigate=useNavigate();
-    let name=useRef();
-    let pwd=useRef();
+
+function Login({ setUser }) {
+    const navigate = useNavigate();
+    const name = useRef();
+    const pwd = useRef();
     const BASE_URL = "https://netflix-clone-backend-1-4ynr.onrender.com";
-    let login=()=>{
-        let data={
-            'username':name.current.value,
-            'password':pwd.current.value
+
+    const login = async () => {
+        const username = name.current.value.trim();
+        const password = pwd.current.value.trim();
+
+        if (!username || !password) {
+            alert("Please enter both username and password");
+            return;
         }
-        let post_url = `${BASE_URL}/mainapp/login/`;
-        axios.post(post_url,data, {
-    headers: {
-        "Content-Type": "application/json"
-    }
-})
-        .then((resp)=>{
-            console.log(resp)
+
+        const data = { username, password };
+        const post_url = `${BASE_URL}/mainapp/login/`;
+
+        try {
+            console.log("Sending login data:", data);
+            const resp = await axios.post(post_url, data, {
+                headers: { "Content-Type": "application/json" }
+            });
+
+            console.log("Response:", resp.data);
+
             const userData = {
-            username: resp.data.username,        
-            is_superuser: resp.data.is_superuser, 
-            token: resp.data.token            
+                username: resp.data.username,
+                is_superuser: resp.data.is_superuser,
+                token: resp.data.token
             };
 
             localStorage.setItem("token", resp.data.token);
-            localStorage.setItem("user", JSON.stringify(userData)); 
+            localStorage.setItem("user", JSON.stringify(userData));
             localStorage.setItem("isSuperuser", resp.data.is_superuser ? "true" : "false");
-            navigate('/app')
+
             setUser(userData);
-        })
-        .catch((err)=>{
-            console.log(err)
+            navigate('/app');
+        } catch (err) {
+            console.error("Login error:", err.response ? err.response.data : err);
+            alert("Login failed: " + (err.response?.data?.non_field_errors || err.message));
         }
-        )
-    }
+    };
+
     return (
         <div className='mainone'>
             <div className="loginn">
-                <h1>Netflix</h1><br /><br />
-                <h3>Login</h3><br />
-                <input type="text" name="" id="" placeholder='Username' ref={name}/><br /><br />
-                <input type="password" name="" id="" placeholder='password' ref={pwd}/><br />
+                <h1>Netflix</h1>
+                <h3>Login</h3>
+                <input type="text" placeholder='Username' ref={name} /><br />
+                <input type="password" placeholder='Password' ref={pwd} /><br />
                 <button onClick={login}>Login</button><br />
-                <a href="" className='forgot'>forgot password</a>
-                <hr /><br />
+                <a href="" className='forgot'>Forgot password</a>
+                <hr />
                 <p>OR</p>
-                <h5>New to netflix?</h5>
-           <Link to='signup' className='link'>REGISTER</Link>
+                <h5>New to Netflix?</h5>
+                <Link to='signup' className='link'>REGISTER</Link>
             </div>
-
-
         </div>
-        
     );
 }
+
 export default Login;
