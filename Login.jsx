@@ -12,7 +12,7 @@ function Login({setUser}){
             'username':name.current.value,
             'password':pwd.current.value
         }
-        let post_url='http://127.0.0.1:8000/mainapp/login/'
+        let post_url='https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/login/'
         axios.post(post_url,data, {
     headers: {
         "Content-Type": "application/json"

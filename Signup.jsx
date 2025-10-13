@@ -16,7 +16,7 @@ function Signup(){
             'password':pwd.current.value,
             'email':mail.current.value
         }
-        let post_url='http://127.0.0.1:8000/mainapp/register/';
+        let post_url='https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/register/';
         axios.post(post_url,data)
         .then((resp)=>{
             console.log(resp)

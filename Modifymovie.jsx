@@ -9,14 +9,13 @@ function Modifymovie() {
     movie_name: "",
     movie_desc: "",
     movie_rating: "",
-    movie_image: "",
   });
-  const [searchId, setSearchId] = useState(""); // For search input
+  const [searchId, setSearchId] = useState("");
   const { movieid } = useParams();
 
-  // Common function to fetch movie data
+  // Fetch movie data
   const getMovie = (idOrName) => {
-    let url = `http://127.0.0.1:8000/mainapp/get/${idOrName}`;
+    let url = `https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/get/${idOrName}`;
     axios
       .get(url)
       .then((resp) => {
@@ -27,7 +26,6 @@ function Modifymovie() {
             movie_name: current.movie_name || "",
             movie_desc: current.movie_desc || "",
             movie_rating: current.movie_rating || "",
-            movie_image: current.movie_image || "",
           });
         } else {
           alert("Movie not found!");
@@ -41,87 +39,77 @@ function Modifymovie() {
 
   // Fetch movie details when route param exists
   useEffect(() => {
-    if (movieid) {
-      getMovie(movieid);
-    }
+    if (movieid) getMovie(movieid);
   }, [movieid]);
 
-  // Update input values
+  // Handle input changes
   const handleChange = (e) => {
     setMovie({ ...movie, [e.target.name]: e.target.value });
   };
 
   // Update movie details
   const update = () => {
-    let url = `http://127.0.0.1:8000/mainapp/put/${movieid}`;
-    let payload = {
-      movie_no: movie.movie_no ? parseInt(movie.movie_no) : 0,
-      movie_name: movie.movie_name,
-      movie_desc: movie.movie_desc,
-      movie_rating: movie.movie_rating ? parseFloat(movie.movie_rating) : 0,
-      movie_image: movie.movie_image,
-    };
+    let url = `https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/put/${movieid}`;
+
+    // Only include non-empty fields
+    let payload = {};
+    if (movie.movie_no) payload.movie_no = parseInt(movie.movie_no);
+    if (movie.movie_name) payload.movie_name = movie.movie_name;
+    if (movie.movie_desc) payload.movie_desc = movie.movie_desc;
+    if (movie.movie_rating) payload.movie_rating = parseFloat(movie.movie_rating);
+
     axios
-      .put(url, payload)
+      .put(url, payload, { headers: { "Content-Type": "application/json" } })
       .then((resp) => {
         alert("Movie updated successfully!");
         console.log(resp.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err.response?.data); // shows backend errors if any
+        alert("Update failed: " + JSON.stringify(err.response?.data));
+      });
   };
 
   // Delete movie
   const deleteMovie = () => {
-    let url = `http://127.0.0.1:8000/mainapp/delete/${movieid}`;
+    let url = `https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/delete/${movieid}`;
     if (window.confirm("Are you sure you want to delete this movie?")) {
       axios
         .delete(url)
         .then(() => {
           alert("Movie deleted successfully");
-          setMovie({
-            movie_no: "",
-            movie_name: "",
-            movie_desc: "",
-            movie_rating: "",
-            movie_image: "",
-          });
+          setMovie({ movie_no: "", movie_name: "", movie_desc: "", movie_rating: "" });
         })
         .catch((err) => console.log(err));
     }
   };
 
-  // Handle search button click
+  // Search movie
   const handleSearch = () => {
-    if (searchId.trim() !== "") {
-      getMovie(searchId);
-    } else {
-      alert("Please enter a movie ID or name to search.");
-    }
+    if (searchId.trim() !== "") getMovie(searchId);
+    else alert("Please enter a movie ID or name to search.");
   };
 
-  // Trigger search when pressing Enter
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
     <div className="modify">
-      {/* 🔍 Search bar */}
+      {/* Search bar */}
       <input
         type="text"
         placeholder="Search by movie ID or name"
         value={searchId}
         onChange={(e) => setSearchId(e.target.value)}
-        onKeyDown={handleKeyPress} // Enter triggers search
+        onKeyDown={handleKeyPress}
         className="movie"
       />
       <button className="searchmovie" onClick={handleSearch}>
         <img src="/images/searchlogo.jpg" alt="Search" />
       </button>
 
-      {/* 📝 Movie Details */}
+      {/* Movie details */}
       <input
         type="number"
         name="movie_no"
@@ -159,17 +147,7 @@ function Modifymovie() {
       />
       <br />
 
-      {/* 🎬 Movie Image */}
-      {movie.movie_image && (
-        <img
-          src={`http://127.0.0.1:8000${movie.movie_image}`}
-          alt={movie.movie_name}
-          style={{ width: "150px", height: "auto" }}
-          className="movieimg"
-        />
-      )}
-
-      {/* ⚙️ Action Buttons */}
+      {/* Action buttons */}
       <button onClick={update} className="update">
         Update Movie
       </button>

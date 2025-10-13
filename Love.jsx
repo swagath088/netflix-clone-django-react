@@ -6,7 +6,7 @@ function Love(){
                let navigate = useNavigate();
             
                useEffect(() => {
-                axios.get('http://127.0.0.1:8000/mainapp/show/')
+                axios.get('https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/show/')
                   .then(resp => {
                     console.log("All movies:", resp.data); // check what your API returns
                     let Love = resp.data.filter(n => n.movie_name.toLowerCase().includes('love'));
@@ -25,7 +25,7 @@ function Love(){
                      {data.map(n => (
                      <div key={n.id}>
                        <img 
-                         src={'http://127.0.0.1:8000'+n.movie_image} 
+                          src={'https://netflix-clone-backend-1-4ynr.onrender.com' + n.movie_image} 
                          alt={n.movie_name} 
                          width="200"
                          onClick={() => navigate('/app/playvideo', { state:{ url: n.movie_video } })} 

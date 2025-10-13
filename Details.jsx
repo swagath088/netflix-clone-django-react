@@ -7,7 +7,7 @@ function Details(){
     let { movieid } = useParams();
     let [data,setdata]=useState([]);
     useEffect(()=>{
-        let url='http://127.0.0.1:8000/mainapp/get/'+movieid;
+         let url='https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/get/'+movieid;
         axios.get(url)
         .then((resp)=>{
             console.log(resp)
@@ -30,7 +30,8 @@ function Details(){
                         <p>movie_desc: {n.movie_desc}</p>
                         <p>movie_rating: {n.movie_rating}</p>
                         {n.movie_image && (
-                            <img src={'http://127.0.0.1:8000' + n.movie_image} alt={n.movie_name} onClick={()=>navigate('/app/Playvideo' , { state:{url:n.movie_video}}) } />
+                            <img src={'https://netflix-clone-backend-1-4ynr.onrender.com' + n.movie_image} 
+                            alt={n.movie_name} onClick={()=>navigate('/app/Playvideo' , { state:{url:n.movie_video}}) } />
                         )}
                         
                         <hr />

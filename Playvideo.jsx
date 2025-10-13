@@ -7,7 +7,7 @@ function Playvideo() {
     return(
         <div className="video">
              <video 
-                src={`http://127.0.0.1:8000/mainapp/video/${location.state.url.split('/').pop()}`} 
+                src={`https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/video/${location.state.url.split('/').pop()}`}
                 autoPlay 
                 controls
             ></video>
