@@ -8,6 +8,8 @@ function Addmovies(){
    let rating =useRef();
    let image =useRef();
    let video =useRef();
+   const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
+
    let [item,setitem]=useState('');
    let add = () => {
   let formData = new FormData();
@@ -19,7 +21,9 @@ function Addmovies(){
   formData.append("movie_image", image.current.files[0]);
   formData.append("movie_video", video.current.files[0]);
 
-  let url = "http://127.0.0.1:8000/mainapp/Add/";
+let url = `${BASE_URL}/mainapp/Add/`;
+
+
 
   axios
     .post(url, formData, {
