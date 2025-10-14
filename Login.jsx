@@ -1,3 +1,4 @@
+// src/components/Login.jsx
 import { useRef } from 'react';
 import '../css/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,7 +8,7 @@ function Login({ setUser }) {
     const navigate = useNavigate();
     const name = useRef();
     const pwd = useRef();
-    const BASE_URL = "https://netflix-clone-backend-1-4ynr.onrender.com";
+    const BASE_URL = import.meta.env.VITE_API_URL;
 
     const login = () => {
         const data = {
@@ -15,13 +16,10 @@ function Login({ setUser }) {
             password: pwd.current.value
         };
 
-        let post_url = `${BASE_URL}/mainapp/login/`;
-
-        axios.post(post_url, data, {
+        axios.post(`${BASE_URL}/mainapp/login/`, data, {
             headers: { "Content-Type": "application/json" }
         })
         .then(resp => {
-            console.log(resp);
             const userData = {
                 username: resp.data.username,
                 is_superuser: resp.data.is_superuser,
@@ -30,10 +28,11 @@ function Login({ setUser }) {
             localStorage.setItem("token", resp.data.token);
             localStorage.setItem("user", JSON.stringify(userData));
             localStorage.setItem("isSuperuser", resp.data.is_superuser ? "true" : "false");
-            setUser(userData);
             navigate('/app');
+            setUser(userData);
         })
         .catch(err => console.log(err));
+        console.log("BASE_URL:", BASE_URL); // <--- Add this line temporarily
     };
 
     return (
@@ -44,11 +43,7 @@ function Login({ setUser }) {
                 <input type="text" placeholder='Username' ref={name} /><br />
                 <input type="password" placeholder='Password' ref={pwd} /><br />
                 <button onClick={login}>Login</button><br />
-                <a href="" className='forgot'>Forgot password</a>
-                <hr />
-                <p>OR</p>
-                <h5>New to Netflix?</h5>
-                <Link to='signup' className='link'>REGISTER</Link>
+                <Link to='signup'>Register</Link>
             </div>
         </div>
     );
