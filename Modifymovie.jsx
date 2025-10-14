@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import "../css/Modifymovie.css";
 
@@ -12,14 +12,14 @@ function Modifymovie() {
   });
   const [searchId, setSearchId] = useState("");
   const { movieid } = useParams();
+  const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
 
-  // Fetch movie data
-  const getMovie = (idOrName) => {
-    let url = `https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/get/${idOrName}`;
-    axios
-      .get(url)
+  // ✅ Wrap getMovie in useCallback to satisfy useEffect dependencies
+  const getMovie = useCallback((idOrName) => {
+    const url = `${BASE_URL}/mainapp/get/${idOrName}`;
+    axios.get(url)
       .then((resp) => {
-        let current = Array.isArray(resp.data) ? resp.data[0] : resp.data;
+        const current = Array.isArray(resp.data) ? resp.data[0] : resp.data;
         if (current) {
           setMovie({
             movie_no: current.movie_no || "",
@@ -35,52 +35,48 @@ function Modifymovie() {
         console.error("Error fetching movie:", err);
         alert("No movie found with that ID or name!");
       });
-  };
+  }, [BASE_URL]);
 
-  // Fetch movie details when route param exists
+  // ✅ useEffect now safe
   useEffect(() => {
     if (movieid) getMovie(movieid);
-  }, [movieid]);
+  }, [movieid, getMovie]);
 
   // Handle input changes
   const handleChange = (e) => {
     setMovie({ ...movie, [e.target.name]: e.target.value });
   };
 
-  // Update movie details
+  // Update movie
   const update = () => {
-    let url = `https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/put/${movieid}`;
-
-    // Only include non-empty fields
-    let payload = {};
+    const url = `${BASE_URL}/mainapp/put/${movieid}`;
+    const payload = {};
     if (movie.movie_no) payload.movie_no = parseInt(movie.movie_no);
     if (movie.movie_name) payload.movie_name = movie.movie_name;
     if (movie.movie_desc) payload.movie_desc = movie.movie_desc;
     if (movie.movie_rating) payload.movie_rating = parseFloat(movie.movie_rating);
 
-    axios
-      .put(url, payload, { headers: { "Content-Type": "application/json" } })
+    axios.put(url, payload, { headers: { "Content-Type": "application/json" } })
       .then((resp) => {
         alert("Movie updated successfully!");
         console.log(resp.data);
       })
       .catch((err) => {
-        console.log(err.response?.data); // shows backend errors if any
+        console.error(err.response?.data);
         alert("Update failed: " + JSON.stringify(err.response?.data));
       });
   };
 
   // Delete movie
   const deleteMovie = () => {
-    let url = `https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/delete/${movieid}`;
+    const url = `${BASE_URL}/mainapp/delete/${movieid}`;
     if (window.confirm("Are you sure you want to delete this movie?")) {
-      axios
-        .delete(url)
+      axios.delete(url)
         .then(() => {
           alert("Movie deleted successfully");
           setMovie({ movie_no: "", movie_name: "", movie_desc: "", movie_rating: "" });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.error(err));
     }
   };
 
@@ -106,7 +102,7 @@ function Modifymovie() {
         className="movie"
       />
       <button className="searchmovie" onClick={handleSearch}>
-        <img src="/images/searchlogo.jpg" alt="Search" />
+        <img src={`${BASE_URL}/images/searchlogo.jpg`} alt="Search" />
       </button>
 
       {/* Movie details */}
@@ -148,14 +144,9 @@ function Modifymovie() {
       <br />
 
       {/* Action buttons */}
-      <button onClick={update} className="update">
-        Update Movie
-      </button>
-      <br />
-      <br />
-      <button onClick={deleteMovie} className="delete">
-        Delete
-      </button>
+      <button onClick={update} className="update">Update Movie</button>
+      <br /><br />
+      <button onClick={deleteMovie} className="delete">Delete</button>
     </div>
   );
 }

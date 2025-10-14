@@ -9,6 +9,7 @@ function Signup(){
     let uname=useRef();
     let pwd=useRef();
     let mail=useRef();
+    const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
     let [item,setItem]=useState('');
     let register=()=>{
         let data={
@@ -16,7 +17,7 @@ function Signup(){
             'password':pwd.current.value,
             'email':mail.current.value
         }
-        let post_url='https://netflix-clone-backend-1-4ynr.onrender.com/mainapp/register/';
+        let post_url = `${BASE_URL}/mainapp/register/`;
         axios.post(post_url,data)
         .then((resp)=>{
             console.log(resp)

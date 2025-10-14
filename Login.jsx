@@ -8,7 +8,8 @@ function Login({ setUser }) {
     const navigate = useNavigate();
     const name = useRef();
     const pwd = useRef();
-    const BASE_URL = import.meta.env.VITE_API_URL;
+    const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
+
 
     const login = () => {
         const data = {
@@ -16,9 +17,10 @@ function Login({ setUser }) {
             password: pwd.current.value
         };
 
-        axios.post(`${BASE_URL}/mainapp/login/`, data, {
+            axios.post(`${BASE_URL}/mainapp/login/`, data, {
             headers: { "Content-Type": "application/json" }
-        })
+            })
+
         .then(resp => {
             const userData = {
                 username: resp.data.username,
