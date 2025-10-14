@@ -7,8 +7,10 @@ import Playvideo from "./Playvideo";
 function All(){
    let [data,setdata]=useState([]);
    let navigate=useNavigate();
+   const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
+
    useEffect(()=>{
-    let get_url='http://127.0.0.1:8000/mainapp/show/';
+    let get_url = `${BASE_URL}/mainapp/show/`;
     axios.get(get_url)
     .then((resp)=>{
         console.log(resp)
@@ -18,14 +20,18 @@ function All(){
         console.log(err)
         setdata(err)
     })
-   },[]);
+   },[BASE_URL]);
     return(
         <div className="imageone">
             {
                 data.map((n)=>{
                     return(
                     <div>
-                        <img src={'http://127.0.0.1:8000'+n.movie_image} alt="" onClick={()=>navigate('/app/Playvideo' , { state:{url:n.movie_video}}) } />
+                        <img 
+                                src={`${BASE_URL}${n.movie_image}`} 
+                                alt={n.movie_name} 
+                                onClick={() => navigate('/app/Playvideo', { state: { url: n.movie_video } })} 
+                                />
                         <p>{n.movie_name}</p>
                     </div>
                     )
