@@ -1,90 +1,55 @@
-/* All.css */
-
-/* Main container (to leave space for sidebar) */
+/* Main content container */
 .imageone {
-  margin-left: 220px; /* same as sidebar width + padding */
+  margin-left: 100px;  /* leave space for sidebar */
   padding: 20px;
   display: flex;
-  flex-wrap: wrap; /* allow cards to wrap */
-  gap: 20px; /* space between cards */
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: flex-start;
-  box-sizing: border-box;
 }
 
-/* Each movie card */
+/* Each movie block */
 .imageone > div {
-  background-color: #1a1a1a;
-  color: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  width: 200px; /* fixed width for desktop */
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  transition: transform 0.2s ease;
+  width: 200px;
 }
 
-.imageone > div:hover {
-  transform: scale(1.05);
-}
-
-/* Movie image */
 .imageone img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
-/* Movie name */
 .imageone p {
-  margin: 10px 0 5px 0;
-  font-weight: 500;
-  font-size: 16px;
+  margin-top: 5px;
+  font-weight: bold;
+  text-align: center;
 }
 
-/* Buttons (if you want to keep for mobile view) */
+/* Remove Delete/Modify buttons if not needed */
 .imageone button {
-  margin: 5px 0;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 6px;
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
   cursor: pointer;
-  font-weight: 500;
-  background-color: #333;
-  color: #fff;
-  transition: all 0.3s ease;
 }
 
-.imageone button:hover {
-  background-color: #555;
-}
-
-/* MOBILE RESPONSIVE */
-@media screen and (max-width: 768px) {
+/* Responsive for mobile */
+@media (max-width: 768px) {
   .imageone {
-    margin-left: 60px; /* mobile sidebar width */
-    gap: 15px;
-    padding: 10px;
-    justify-content: center; /* center movie cards */
+    margin-left: 80px;
+    justify-content: center;
+    gap: 10px;
   }
 
   .imageone > div {
-    width: 140px; /* smaller cards */
-    padding: 8px;
-  }
-
-  .imageone p {
-    font-size: 14px;
+    width: 150px;
   }
 
   .imageone button {
-    font-size: 12px;
+    font-size: 10px;
     padding: 4px 6px;
-  }
-
-  .imageone img {
-    border-radius: 6px;
   }
 }

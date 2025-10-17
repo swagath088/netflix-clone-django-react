@@ -1,21 +1,20 @@
-/* Sidebar.css */
-
-/* Make sidebar fixed on left */
+/* Sidebar container */
 .sidebar {
-  position: fixed;
-  top: 0;
+  position: fixed;       /* stays fixed on left */
   left: 0;
-  width: 100px; /* fixed width */
-  height: 100vh; /* full height */
-  background-color: #141414; /* dark Netflix-like background */
+  top: 0;
+  width: 100px;          /* fixed sidebar width */
+  height: 100vh;         /* full height */
+  background-color: #111; 
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+  box-shadow: 2px 0 5px rgba(0,0,0,0.3);
   z-index: 100;
 }
 
+/* Sidebar links list */
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -24,51 +23,35 @@
 }
 
 .sidebar li {
-  margin: 20px 0;
-  text-align: center;
+  margin: 10px 0;
   width: 100%;
 }
 
 .sidebar-btn {
   display: block;
-  width: 100%;
-  padding: 10px 5px;
+  text-align: center;
   color: white;
   text-decoration: none;
-  font-size: 12px;
-  transition: 0.2s;
-  word-wrap: break-word;
+  font-size: 14px;
+  padding: 10px;
+  width: 100%;
+  transition: background 0.3s;
 }
 
 .sidebar-btn:hover {
-  background-color: #e50914;
-  color: white;
-  border-radius: 5px;
+  background-color: #444;
+  cursor: pointer;
 }
 
-/* Main content layout */
-.main-content {
-  margin-left: 100px; /* same as sidebar width */
-  padding: 20px;
-}
-
-/* Responsive for mobile */
-@media (max-width: 600px) {
+/* Mobile adjustments */
+@media (max-width: 768px) {
   .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 10px 0;
+    width: 80px;
+    padding-top: 10px;
   }
 
-  .sidebar li {
-    margin: 0;
-  }
-
-  .main-content {
-    margin-left: 0;
-    margin-top: 10px;
+  .sidebar-btn {
+    font-size: 12px;
+    padding: 8px;
   }
 }
