@@ -9,7 +9,7 @@ function Playvideo() {
 
   return (
     <div className="video">
-       <video src={location.state.url} autoPlay controls></video>
+      <video src={movie.movie_video} controls width="100%" />
 
     </div>
   );

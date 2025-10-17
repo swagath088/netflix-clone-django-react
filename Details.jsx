@@ -36,9 +36,10 @@ function Details() {
           <p><strong>Description:</strong> {movie.movie_desc}</p>
           <p><strong>Rating:</strong> {movie.movie_rating}</p>
           {movie.movie_image && (
-            <img
-              src={movie.movie_image.startsWith('http') ? movie.movie_image : `${BASE_URL}${movie.movie_image}`}
-              alt={movie.movie_name}
+                 <img
+              src={n.movie_image}
+              alt={n.movie_name}
+              width="200"
               className="movie-image"
               onClick={() => navigate('/app/Playvideo', { state: { url: movie.movie_video } })}
             />

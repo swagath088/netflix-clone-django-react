@@ -127,13 +127,9 @@ function Modifymovie() {
       {movie.movie_image && (
         <div className="movie-preview">
           <img
-            src={
-              movie.movie_image.startsWith("http")
-                ? movie.movie_image
-                : `${BASE_URL}${movie.movie_image}`
-            }
-            alt={movie.movie_name}
-            width={200}
+              src={n.movie_image}
+              alt={n.movie_name}
+              width="200"
           />
         </div>
       )}
