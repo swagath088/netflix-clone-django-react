@@ -24,8 +24,8 @@ function Webseries() {
             {data.length === 0 && <p>No web series found</p>}
             {data.map(n => (
                 <div key={n.id}>
-                    <img
-                        src={n.movie_image?.startsWith('http') ? n.movie_image : `${BASE_URL}${n.movie_image}`}
+                     <img
+                        src={n.movie_image}
                         alt={n.movie_name}
                         width="200"
                         onClick={() => navigate('/app/playvideo', { state: { url: n.movie_video } })}
