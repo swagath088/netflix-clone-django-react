@@ -118,8 +118,8 @@ function Modifymovie() {
           onKeyDown={handleKeyPress}
           className="movie"
         />
-        <button className="searchmovie" onClick={handleSearch}>
-          Search
+        <button className="searchmovie" >
+          <img src="/images/searchlogo.jpg"  alt=""  onClick={handleSearch}/>
         </button>
       </div>
 
