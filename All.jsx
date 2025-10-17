@@ -44,18 +44,15 @@ function All() {
       {movies.length === 0 && <p>No movies found</p>}
       {movies.map((n) => (
         <div key={n.movie_no}>
-          <img
-            src={
-              n.movie_image?.startsWith("http")
-                ? n.movie_image
-                : `${BASE_URL}${n.movie_image}`
-            }
-            alt={n.movie_name}
-            width="200"
-            onClick={() =>
-              navigate("/app/playvideo", { state: { url: n.movie_video } })
-            }
-          />
+                  <img
+          src={n.movie_image}
+          alt={n.movie_name}
+          width="200"
+          onClick={() =>
+            navigate("/app/playvideo", { state: { url: n.movie_video } })
+          }
+        />
+
           <p>{n.movie_name}</p>
           <button onClick={() => deleteMovie(n.movie_no)}>Delete</button>
           <button onClick={() => navigate(`/modify/${n.movie_no}`)}>
