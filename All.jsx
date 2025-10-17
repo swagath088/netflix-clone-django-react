@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/All.css"; // optional CSS file
 
 function All() {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
-  const BASE_URL =
-    import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+  const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
   // Fetch all movies
   const fetchMovies = () => {
@@ -23,42 +23,23 @@ function All() {
     fetchMovies();
   }, []);
 
-  // Delete movie
-  const deleteMovie = (id) => {
-    if (!window.confirm("Are you sure you want to delete this movie?")) return;
-
-    axios
-      .delete(`${BASE_URL}/mainapp/delete/${id}/`)
-      .then(() => {
-        alert("Movie deleted successfully!");
-        setMovies((prev) => prev.filter((m) => m.movie_no !== id)); // remove from list
-      })
-      .catch((err) => {
-        console.error(err.response?.data || err);
-        alert("Delete failed!");
-      });
-  };
-
   return (
     <div className="imageone">
       {movies.length === 0 && <p>No movies found</p>}
-      {movies.map((n) => (
-        <div key={n.movie_no}>
+      {movies.map((movie) => (
+        <div key={movie.movie_no} className="movie-card">
           <img
-          src={n.movie_image_url}  // use the serializer field
-          alt={n.movie_name}
-          width="200"
-          onClick={() =>
-            navigate("/app/playvideo", { state: { url: n.movie_video_url } })
-          }
-        />
-
-
-          <p>{n.movie_name}</p>
-          <button onClick={() => deleteMovie(n.movie_no)}>Delete</button>
-          <button onClick={() => navigate(`/modify/${n.movie_no}`)}>
-            Modify
-          </button>
+            src={movie.movie_image_url || movie.movie_image}
+            alt={movie.movie_name}
+            width="200"
+            onClick={() =>
+              navigate("/app/playvideo", {
+                state: { url: movie.movie_video_url || movie.movie_video },
+              })
+            }
+            className="movie-image"
+          />
+          <p>{movie.movie_name}</p>
         </div>
       ))}
     </div>

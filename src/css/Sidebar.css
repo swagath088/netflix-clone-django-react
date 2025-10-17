@@ -1,48 +1,71 @@
-/* ====================== */
-/* Original Sidebar CSS */
-/* ====================== */
-.sidebar ul li{
-    font-size: x-large;
-    margin-top: 10vh;
+/* Sidebar.css */
+
+/* General sidebar styling */
+.sidebar {
+  position: fixed; /* fixed on the left */
+  top: 0;
+  left: 0;
+  height: 100vh; /* full height */
+  width: 200px; /* adjust width */
+  background-color: #1a1a1a; /* dark sidebar */
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 1000;
+  overflow-y: auto; /* scroll if content exceeds height */
 }
+
+/* Sidebar ul styling */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* space between buttons */
+}
+
+/* Sidebar buttons/links */
 .sidebar-btn {
-    display: block;      
-    padding: 10px 20px;
-    margin: 5px 0;
-    background-color: black;
-    color: white;          
-    text-decoration: none;   
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  background-color: #333;
+  padding: 12px 15px;
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 .sidebar-btn:hover {
-    background-color: #0056b3; 
+  background-color: #555;
+  color: #fff;
 }
 
-/* ====================== */
-/* Responsive Media Queries */
-/* ====================== */
-@media screen and (max-width: 1024px) {
-    .sidebar ul li {
-        font-size: large;
-        margin-top: 8vh;
-    }
-    .sidebar-btn {
-        padding: 8px 16px;
-    }
+/* Active link (optional) */
+.sidebar-btn.active {
+  background-color: #ff4c4c;
+  color: #fff;
 }
 
+/* Responsive: mobile devices */
 @media screen and (max-width: 768px) {
-    .sidebar ul li {
-        font-size: medium;
-        margin-top: 5vh;
-    }
-    .sidebar-btn {
-        padding: 6px 12px;
-        font-size: small;
-    }
+  .sidebar {
+    width: 60px; /* make it thinner for mobile */
+    padding: 10px 5px;
+  }
+
+  .sidebar ul {
+    gap: 10px;
+  }
+
+  .sidebar-btn {
+    padding: 10px 5px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
 }
