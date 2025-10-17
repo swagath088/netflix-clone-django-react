@@ -16,6 +16,8 @@ function Login({ setUser }) {
             username: name.current.value,
             password: pwd.current.value
         };
+        console.log("BASE_URL currently used:", BASE_URL);
+        console.log("Using BASE_URL:", BASE_URL);
 
             axios.post(`${BASE_URL}/mainapp/login/`, data, {
             headers: { "Content-Type": "application/json" }
