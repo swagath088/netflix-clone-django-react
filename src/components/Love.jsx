@@ -25,9 +25,9 @@ function Love() {
             {data.map(n => (
                 <div key={n.id}>
                     <img
-                        src={n.movie_image?.startsWith('http') ? n.movie_image : `${BASE_URL}${n.movie_image}`}
-                        alt={n.movie_name}
-                        width="200"
+                    src={n.movie_image}
+                    alt={n.movie_name}
+                    width="200"
                         onClick={() => navigate('/app/playvideo', { state: { url: n.movie_video } })}
                     />
                     <p>{n.movie_name}</p>
