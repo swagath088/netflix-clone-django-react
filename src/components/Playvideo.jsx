@@ -9,7 +9,12 @@ function Playvideo() {
 
   return (
     <div className="video">
-      <video src={movie.movie_video} controls width="100%" />
+      <video
+        src={location.state.url} // location.state.url already has HTTPS
+        autoPlay
+        controls
+      ></video>
+
 
     </div>
   );
