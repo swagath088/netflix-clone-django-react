@@ -44,14 +44,15 @@ function All() {
       {movies.length === 0 && <p>No movies found</p>}
       {movies.map((n) => (
         <div key={n.movie_no}>
-                  <img
-          src={n.movie_image}
+          <img
+          src={n.movie_image_url}  // use the serializer field
           alt={n.movie_name}
           width="200"
           onClick={() =>
-            navigate("/app/playvideo", { state: { url: n.movie_video } })
+            navigate("/app/playvideo", { state: { url: n.movie_video_url } })
           }
         />
+
 
           <p>{n.movie_name}</p>
           <button onClick={() => deleteMovie(n.movie_no)}>Delete</button>
