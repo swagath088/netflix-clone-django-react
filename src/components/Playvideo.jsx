@@ -9,11 +9,8 @@ function Playvideo() {
 
   return (
     <div className="video">
-      <video
-        src={location.state.url.startsWith('http') ? location.state.url : `${BASE_URL}${location.state.url}`}
-        autoPlay
-        controls
-      ></video>
+       <video src={location.state.url} autoPlay controls></video>
+
     </div>
   );
 }
