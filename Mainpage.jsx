@@ -1,7 +1,6 @@
 import All from "./All";
 import { Routes,Route,Navigate} from "react-router-dom";
 import '../css/Mainpage.css';
-import Addmovies from "./Addmovies";
 import Love from "./Love";
 import Details from "./Details";
 import Playvideo from "./Playvideo";
@@ -21,10 +20,6 @@ function Mainpage(){
           <Route path="playvideo" element={<Playvideo/>}/>
           <Route path="action" element={<Action/>}/>
           <Route path="webseries" element={<Webseries/>}/>
-          <Route
-            path="add"
-            element={isSuperuser ? <Addmovies /> : <Navigate to="/app" />}
-          />
           <Route
             path="details/:movieid"
             element={<Details />} 

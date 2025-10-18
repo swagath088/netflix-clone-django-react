@@ -14,7 +14,6 @@ function Sidebar({ user }) {
         <li><Link to='/app/details/1' className='sidebar-btn '>Movie <br />details</Link></li>
         {user?.is_superuser && (
           <>
-            <li><Link to='/app/add' className='sidebar-btn '>Add</Link></li>
             <li><Link to='/app/modify/1' className='sidebar-btn '>Modify</Link></li>
           </>
         )}
