@@ -41,15 +41,15 @@ function Signup(){
             <div className='main'>
                 <h1 className='netflix'>NETFLIX</h1>
                 <h2 className='head'>REGISTER</h2><br /><br />
-                <input type="text" name="" id="" className='one'  placeholder='Username' ref={uname}/><br />
-                <input type="password" name="" id="" className='two' placeholder='password' ref={pwd} /><br /><br />
+                <input type="text" name="" id="" className='one'  placeholder='Username' ref={uname}/>
+                <input type="password" name="" id="" className='two' placeholder='password' ref={pwd} />
                 <input type="email" name="" id=""  className='email ' placeholder='email@gmail.com' ref={mail}/>
-                <button onClick={register}>Register</button><br /><br />
-                <hr  className='line'/><br /><br />
-                <h3 className='or'>OR</h3 ><br /><br />
+                <button onClick={register}>Register</button><br />
+                <hr  className='line'/>
+                <h3 className='or'>OR</h3 >
                 <label htmlFor="" className='sign'>
-                    <h4>Already have a account?</h4>
-                    <Link to='/'>Login</Link>
+                    <p className="no-acc-text"><h4>Already have a account?</h4></p>
+                    <button className="login-btn" onClick={() => window.location.href = '/'}>Login</button>
                 </label>
                 <p className='p'>This page is protected by Google reCAPTCHA to ensure <br />you're not a bot.</p><br /><br />
                 <p className='item'>{item}</p>
