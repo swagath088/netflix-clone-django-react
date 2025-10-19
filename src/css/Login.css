@@ -1,167 +1,172 @@
-*{
-    padding: 0px;
-    margin: 0px;
+/* ====================== */
+/* Reset CSS */
+/* ====================== */
+* {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 
-/* Background for login page */
-.loginn{
-    background-image: url('images/netflix.jpg');
+/* ====================== */
+/* Full page background */
+/* ====================== */
+.mainone {
     width: 100vw;
     height: 100vh;
+    background-image: url('/images/netflix.jpg'); /* absolute path */
     background-size: cover;
     background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-/* Main login container */
-.loginn .log{
-    border: 2px solid black;
-    width: 30vw;
-    height: 60vh;
-    position: absolute;
-    left: 35%;
-    top: 15vh;
-    background-color: rgba(11, 11, 11, 0.781);
-    color: whitesmoke;
-    border-radius: 10px;
-    padding: 2vh 2vw;
-}
-
-/* Heading */
-.loginn h1{
+/* ====================== */
+/* Centered login box */
+/* ====================== */
+.loginn {
+    width: 350px;
+    max-width: 90%;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 40px 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
     text-align: center;
-    color: red;
-    font-size: xx-large;
-    font-style: italic;
-    font-weight: bolder;
-    margin-bottom: 3vh;
 }
 
-/* Subhead */
-.loginn h3{
-    font-size: xx-large;
+/* Main heading */
+.loginn h1 {
+    color: red;
+    font-size: 2.2rem;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Subheading */
+.loginn h3 {
     color: whitesmoke;
-    text-align: left;
-    margin-bottom: 2vh;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
 }
 
 /* Inputs */
 .loginn input[type=text],
-.loginn input[type=password]{
-    width: 90%;
-    height: 5vh;
-    margin: 1vh auto;
-    display: block;
-    background-color: rgba(11, 11, 11, 0.781);
-    border-radius: 5px;
+.loginn input[type=password] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
     border: none;
-    text-align: center;
+    background-color: rgba(255,255,255,0.1);
     color: white;
-    font-size: larger;
+    font-size: 1rem;
+    text-align: center;
 }
 
-.loginn input::placeholder{
+.loginn input::placeholder {
     color: whitesmoke;
     opacity: 1;
 }
 
 /* Login button */
-.loginn button{
-    width: 95%;
-    height: 5vh;
-    margin: 2vh auto;
-    display: block;
+.loginn button.login-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
     background-color: rgb(221, 55, 55);
     color: whitesmoke;
     border: none;
-    border-radius: 5px;
-    font-size: x-large;
+    border-radius: 6px;
+    font-size: 1.1rem;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Forgot password link */
-.loginn .forgot{
+.loginn button.login-btn:hover {
+    background-color: rgb(200, 45, 45);
+}
+
+/* Register button/link */
+.loginn a.register-btn {
     display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
     text-align: center;
+    background-color: rgb(0, 100, 255);
     color: whitesmoke;
-    font-size: larger;
+    border-radius: 6px;
     text-decoration: none;
-    margin-top: 2vh;
+    font-size: 1.05rem;
+    transition: background-color 0.3s ease;
 }
 
-/* Horizontal line */
-.loginn hr{
-    margin: 3vh auto;
-    width: 80%;
-    color: whitesmoke;
+.loginn a.register-btn:hover {
+    background-color: rgb(0, 80, 220);
 }
 
-/* OR text */
-.loginn .or{
-    text-align: center;
-    font-size: larger;
+/* "Don't have an account?" text */
+.loginn .no-acc-text {
     color: grey;
-    margin: 2vh 0;
+    font-size: 0.9rem;
+    margin: 15px 0 5px 0;
 }
 
-/* Register link */
-.loginn .register,
-.loginn .link{
-    display: block;
-    text-align: center;
-    font-size: x-large;
-    color: whitesmoke;
-    text-decoration: none;
-    margin-top: 2vh;
-}
-
-/* Footer paragraph */
-.loginn p{
-    text-align: center;
-    font-size: large;
-    color: grey;
-    margin-top: 2vh;
-}
-
-/* Login messages */
-.loginn .item{
-    text-align: center;
-    font-size: x-large;
-    margin-top: 2vh;
-}
-
-/* Responsive for small screens */
-@media screen and (max-width: 768px){
-    .loginn .log{
+/* ====================== */
+/* Responsive styles */
+/* ====================== */
+@media screen and (max-width: 768px) {
+    .loginn {
         width: 90%;
-        height: auto;
-        top: 5vh;
-        left: 5%;
-        padding: 4vh 5vw;
+        padding: 30px 20px;
+    }
+
+    .loginn h1 {
+        font-size: 1.8rem;
+    }
+
+    .loginn h3 {
+        font-size: 1.2rem;
     }
 
     .loginn input[type=text],
-    .loginn input[type=password]{
-        width: 95%;
-        font-size: medium;
+    .loginn input[type=password],
+    .loginn button.login-btn,
+    .loginn a.register-btn {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+
+/* Very small screens */
+@media screen and (max-width: 480px) {
+    .loginn {
+        padding: 25px 15px;
     }
 
-    .loginn button{
-        width: 100%;
-        font-size: large;
+    .loginn h1 {
+        font-size: 1.6rem;
     }
 
-    .loginn h1{
-        font-size: x-large;
+    .loginn h3 {
+        font-size: 1rem;
     }
 
-    .loginn h3,
-    .loginn .forgot,
-    .loginn .or,
-    .loginn .register,
-    .loginn .link,
-    .loginn p,
-    .loginn .item{
-        font-size: medium;
+    .loginn input[type=text],
+    .loginn input[type=password],
+    .loginn button.login-btn,
+    .loginn a.register-btn {
+        font-size: 0.95rem;
+        padding: 8px;
+    }
+
+    .loginn .no-acc-text {
+        font-size: 0.85rem;
+        margin: 10px 0 5px 0;
     }
 }

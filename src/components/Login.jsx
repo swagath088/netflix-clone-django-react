@@ -46,8 +46,9 @@ function Login({ setUser }) {
                 <h3>Login</h3>
                 <input type="text" placeholder='Username' ref={name} /><br />
                 <input type="password" placeholder='Password' ref={pwd} /><br />
-                <button onClick={login}>Login</button><br />
-                <Link to='signup'>Register</Link>
+                <button className="login-btn" onClick={login}>Login</button><br />
+                <p className="no-acc-text"><h4>Dont have an acc? </h4></p>
+                <Link className="register-btn" to='signup'>Register</Link>
             </div>
         </div>
     );
