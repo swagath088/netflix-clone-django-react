@@ -12,7 +12,7 @@
 .container .heading{
     grid-area: header;
     height: 5vh;
-    width: 100vw;
+    width: 95vw;
     background-color: black;
     color: whitesmoke;
 }
@@ -26,15 +26,15 @@
 .container .mainpage{
     grid-area: main;
     text-align: center;
-    width: 100%;
-    height: 120vh;
+    width: 91vw;
+    height: 115vh;
     background-color: black;
     color: white;
 }
 .container .foot{
     grid-area: footer;
     height: 3vh;
-    width: 100vw;
+    width: 99vw;
     text-align: center;
     background-color: black;
     color: grey;
@@ -55,6 +55,38 @@
         height: auto;
     }
 }
+.container .heading{
+    grid-area: header;
+    height: 5vh;
+    width: 100%;       /* changed from 95vw to 100% */
+    background-color: black;
+    color: whitesmoke;
+}
+
+.container .mainpage{
+    grid-area: main;
+    text-align: center;
+    width: 100%;       /* changed from 91vw to 100% */
+    min-height: 115vh; /* keep height if needed, can also use auto */
+    background-color: black;
+    color: white;
+}
+
+.container .foot{
+    grid-area: footer;
+    height: 3vh;
+    width: 100%;       /* changed from 99vw to 100% */
+    text-align: center;
+    background-color: black;
+    color: grey;
+    font-size: x-small;
+}
+
+/* Optional: prevent horizontal scroll completely */
+html, body {
+    overflow-x: hidden;
+}
+
 
 @media screen and (max-width: 768px) {
     .container {
@@ -82,3 +114,4 @@
         font-size: smaller;
     }
 }
+
