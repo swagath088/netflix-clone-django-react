@@ -4,22 +4,32 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../css/Moviedetails.css";
 
 function Moviedetails() {
+  const [allMovies, setAllMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
-  const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
+  const BASE_URL =
+    import.meta.env.VITE_API_URL ||
+    "https://netflix-clone-backend-1-4ynr.onrender.com";
 
-  // Fetch all movies only if no filteredMovies passed from Header
   useEffect(() => {
+    // If movies are passed from Header
     if (location.state?.filteredMovies) {
       setMovies(location.state.filteredMovies);
+      setAllMovies(location.state.filteredMovies);
     } else {
       axios
         .get(`${BASE_URL}/mainapp/show/`)
-        .then((resp) => setMovies(resp.data))
-        .catch(() => setMovies([]));
+        .then((resp) => {
+          setMovies(resp.data);
+          setAllMovies(resp.data);
+        })
+        .catch(() => {
+          setMovies([]);
+          setAllMovies([]);
+        });
     }
   }, [location.state]);
 
@@ -27,14 +37,18 @@ function Moviedetails() {
     const query = searchText.trim().toLowerCase();
     if (!query) return alert("Enter movie ID or Name");
 
-    const filtered = movies.filter(
+    const filtered = allMovies.filter(
       (m) =>
         m.movie_name.toLowerCase().includes(query) ||
         m.movie_no.toString() === query
     );
 
-    if (filtered.length === 0) return alert("No movies found");
-    setMovies(filtered);
+    if (filtered.length === 0) {
+      alert("No movies found");
+    } else {
+      setMovies(filtered);
+    }
+
     setSearchText("");
   };
 
@@ -64,9 +78,15 @@ function Moviedetails() {
         ) : (
           movies.map((movie) => (
             <div key={movie.movie_no} className="moviedetails-item">
-              <p><strong>Movie No:</strong> {movie.movie_no}</p>
-              <p><strong>Name:</strong> {movie.movie_name}</p>
-              <p><strong>Rating:</strong> {movie.movie_rating}</p>
+              <p>
+                <strong>Movie No:</strong> {movie.movie_no}
+              </p>
+              <p>
+                <strong>Name:</strong> {movie.movie_name}
+              </p>
+              <p>
+                <strong>Rating:</strong> {movie.movie_rating}
+              </p>
               {movie.movie_image && (
                 <img
                   src={movie.movie_image_url || movie.movie_image}
