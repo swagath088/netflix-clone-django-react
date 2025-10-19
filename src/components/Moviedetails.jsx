@@ -1,28 +1,44 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../css/Moviedetails.css';
+import "../css/Moviedetails.css";
 
-function Moviedetails({ movies, allMovies, setMovies }) {
-  const [searchText, setSearchText] = useState('');
+function Moviedetails() {
+  const [movies, setMovies] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
+
+  const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
+
+  // Fetch all movies
+  const fetchMovies = () => {
+    axios
+      .get(`${BASE_URL}/mainapp/show/`)
+      .then((resp) => setMovies(resp.data))
+      .catch(() => setMovies([]));
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   const handleSearch = () => {
     const query = searchText.trim().toLowerCase();
     if (!query) return alert("Enter movie ID or Name");
 
-    const filtered = allMovies.filter(
-      m => 
-        m.movie_name.toLowerCase().includes(query) || 
+    const filtered = movies.filter(
+      (m) =>
+        m.movie_name.toLowerCase().includes(query) ||
         m.movie_no.toString() === query
     );
 
     if (filtered.length === 0) alert("No movies found");
     setMovies(filtered);
-    setSearchText('');
+    setSearchText("");
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSearch();
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
@@ -45,7 +61,7 @@ function Moviedetails({ movies, allMovies, setMovies }) {
         {movies.length === 0 ? (
           <p className="moviedetails-none">No movies available</p>
         ) : (
-          movies.map(movie => (
+          movies.map((movie) => (
             <div key={movie.movie_no} className="moviedetails-item">
               <p><strong>Movie No:</strong> {movie.movie_no}</p>
               <p><strong>Name:</strong> {movie.movie_name}</p>
@@ -53,11 +69,15 @@ function Moviedetails({ movies, allMovies, setMovies }) {
               <p><strong>Rating:</strong> {movie.movie_rating}</p>
               {movie.movie_image && (
                 <img
-                  src={movie.movie_image}
+                  src={movie.movie_image_url || movie.movie_image}
                   alt={movie.movie_name}
                   width="200"
                   className="moviedetails-image"
-                  onClick={() => navigate('/app/playvideo', { state: { url: movie.movie_video } })}
+                  onClick={() =>
+                    navigate("/app/playvideo", {
+                      state: { url: movie.movie_video_url || movie.movie_video },
+                    })
+                  }
                 />
               )}
             </div>
