@@ -1,31 +1,41 @@
-import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "../css/Header.css";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../css/Header.css';
 
 function Header({ allMovies }) {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleSearch = () => {
     const query = searchText.trim().toLowerCase();
     if (!query) return alert("Enter movie ID or Name");
 
+    // Filter matching movies
     const filtered = allMovies.filter(
-      (m) =>
+      m =>
         m.movie_name.toLowerCase().includes(query) ||
         m.movie_no.toString() === query
     );
 
-    if (filtered.length === 0) return alert("No movies found");
+    if (filtered.length === 0) {
+      alert("No movies found");
+      return;
+    }
 
-    // Navigate to Moviedetails with filtered movies
-    navigate("/app/moviedetails", { state: { filteredMovies: filtered } });
-    setSearchText("");
+    // ✅ navigate with timestamp param to trigger reload in Moviedetails
+    navigate(`/app/moviedetails?refresh=${Date.now()}`, {
+      state: { filteredMovies: filtered },
+    });
+
+    setSearchText('');
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") handleSearch();
+    if (e.key === 'Enter') handleSearch();
+  };
+
+  const handleLogout = () => {
+    navigate('/Logout');
   };
 
   return (
@@ -47,7 +57,7 @@ function Header({ allMovies }) {
         <img src="/images/searchlogo.jpg" alt="Search" />
       </button>
 
-      <button className="logo" onClick={() => navigate("/Logout")}>
+      <button className="logo" onClick={handleLogout}>
         <img src="/images/you.jpg" alt="Logout" />
       </button>
     </header>

@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../css/Moviedetails.css";
 
 function Moviedetails() {
-  const [allMovies, setAllMovies] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]); // stores all data
+  const [movies, setMovies] = useState([]); // stores what’s displayed
   const [searchText, setSearchText] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -15,23 +15,24 @@ function Moviedetails() {
     "https://netflix-clone-backend-1-4ynr.onrender.com";
 
   useEffect(() => {
-    // If movies are passed from Header
-    if (location.state?.filteredMovies) {
-      setMovies(location.state.filteredMovies);
-      setAllMovies(location.state.filteredMovies);
-    } else {
-      axios
-        .get(`${BASE_URL}/mainapp/show/`)
-        .then((resp) => {
+    const fetchMovies = async () => {
+      try {
+        const resp = await axios.get(`${BASE_URL}/mainapp/show/`);
+        setAllMovies(resp.data);
+        // if we came from Header search, show only those first
+        if (location.state?.filteredMovies?.length > 0) {
+          setMovies(location.state.filteredMovies);
+        } else {
           setMovies(resp.data);
-          setAllMovies(resp.data);
-        })
-        .catch(() => {
-          setMovies([]);
-          setAllMovies([]);
-        });
-    }
-  }, [location.state]);
+        }
+      } catch {
+        setAllMovies([]);
+        setMovies([]);
+      }
+    };
+
+    fetchMovies();
+  }, [location.key]); // refresh on every navigation
 
   const handleSearch = () => {
     const query = searchText.trim().toLowerCase();
@@ -95,7 +96,9 @@ function Moviedetails() {
                   className="moviedetails-image"
                   onClick={() =>
                     navigate("/app/playvideo", {
-                      state: { url: movie.movie_video_url || movie.movie_video },
+                      state: {
+                        url: movie.movie_video_url || movie.movie_video,
+                      },
                     })
                   }
                 />
