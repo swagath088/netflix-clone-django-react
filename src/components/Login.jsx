@@ -1,5 +1,4 @@
-// src/components/Login.jsx
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import '../css/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -8,21 +7,21 @@ function Login({ setUser }) {
     const navigate = useNavigate();
     const name = useRef();
     const pwd = useRef();
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
     const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
 
-
     const login = () => {
+        setLoading(true);
+        setErrorMsg(''); // reset error
         const data = {
             username: name.current.value,
             password: pwd.current.value
         };
-        console.log("BASE_URL currently used:", BASE_URL);
-        console.log("Using BASE_URL:", BASE_URL);
 
-            axios.post(`${BASE_URL}/mainapp/login/`, data, {
+        axios.post(`${BASE_URL}/mainapp/login/`, data, {
             headers: { "Content-Type": "application/json" }
-            })
-
+        })
         .then(resp => {
             const userData = {
                 username: resp.data.username,
@@ -35,8 +34,15 @@ function Login({ setUser }) {
             navigate('/app');
             setUser(userData);
         })
-        .catch(err => console.log(err));
-
+        .catch(err => {
+            console.log(err);
+            if (err.response && err.response.status === 401) {
+                setErrorMsg("Invalid credentials");
+            } else {
+                setErrorMsg("Something went wrong. Try again.");
+            }
+        })
+        .finally(() => setLoading(false));
     };
 
     return (
@@ -46,7 +52,13 @@ function Login({ setUser }) {
                 <h3>Login</h3>
                 <input type="text" placeholder='Username' ref={name} /><br />
                 <input type="password" placeholder='Password' ref={pwd} /><br />
-                <button className="login-btn" onClick={login}>Login</button><br />
+
+                <button className="login-btn" onClick={login} disabled={loading}>
+                    {loading ? "Please wait... loading..." : "Login"}
+                </button><br />
+
+                {errorMsg && <p style={{color:"red", marginTop:"10px"}}>{errorMsg}</p>}
+
                 <p className="no-acc-text"><h4>Dont have an acc? </h4></p>
                 <Link className="register-btn" to='signup'>Register</Link>
             </div>
