@@ -1,26 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../css/Moviedetails.css";
 
 function Moviedetails() {
   const [movies, setMovies] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const location = useLocation();
   const navigate = useNavigate();
 
   const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
 
-  // Fetch all movies
-  const fetchMovies = () => {
-    axios
-      .get(`${BASE_URL}/mainapp/show/`)
-      .then((resp) => setMovies(resp.data))
-      .catch(() => setMovies([]));
-  };
-
+  // Fetch all movies only if no filteredMovies passed from Header
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    if (location.state?.filteredMovies) {
+      setMovies(location.state.filteredMovies);
+    } else {
+      axios
+        .get(`${BASE_URL}/mainapp/show/`)
+        .then((resp) => setMovies(resp.data))
+        .catch(() => setMovies([]));
+    }
+  }, [location.state]);
 
   const handleSearch = () => {
     const query = searchText.trim().toLowerCase();
@@ -32,7 +33,7 @@ function Moviedetails() {
         m.movie_no.toString() === query
     );
 
-    if (filtered.length === 0) alert("No movies found");
+    if (filtered.length === 0) return alert("No movies found");
     setMovies(filtered);
     setSearchText("");
   };
@@ -65,7 +66,6 @@ function Moviedetails() {
             <div key={movie.movie_no} className="moviedetails-item">
               <p><strong>Movie No:</strong> {movie.movie_no}</p>
               <p><strong>Name:</strong> {movie.movie_name}</p>
-              <p><strong>Description:</strong> {movie.movie_desc}</p>
               <p><strong>Rating:</strong> {movie.movie_rating}</p>
               {movie.movie_image && (
                 <img

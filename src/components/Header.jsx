@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import '../css/Header.css';
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "../css/Header.css";
 
-function Header({ allMovies, setMovies }) {
-  const [searchText, setSearchText] = useState('');
+function Header({ allMovies }) {
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -11,30 +11,21 @@ function Header({ allMovies, setMovies }) {
     const query = searchText.trim().toLowerCase();
     if (!query) return alert("Enter movie ID or Name");
 
-    // Filter movies from full dataset
     const filtered = allMovies.filter(
-      m => 
-        m.movie_name.toLowerCase().includes(query) || 
+      (m) =>
+        m.movie_name.toLowerCase().includes(query) ||
         m.movie_no.toString() === query
     );
 
-    if (filtered.length === 0) alert("No movies found");
-    setMovies(filtered);
+    if (filtered.length === 0) return alert("No movies found");
 
-    // Navigate to Moviedetails if not already there
-    if (location.pathname !== '/app/moviedetails') {
-      navigate('/app/moviedetails');
-    }
-
-    setSearchText('');
+    // Navigate to Moviedetails with filtered movies
+    navigate("/app/moviedetails", { state: { filteredMovies: filtered } });
+    setSearchText("");
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSearch();
-  };
-
-  const handleLogout = () => {
-    navigate('/Logout');
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
@@ -56,7 +47,7 @@ function Header({ allMovies, setMovies }) {
         <img src="/images/searchlogo.jpg" alt="Search" />
       </button>
 
-      <button className="logo" onClick={handleLogout}>
+      <button className="logo" onClick={() => navigate("/Logout")}>
         <img src="/images/you.jpg" alt="Logout" />
       </button>
     </header>
