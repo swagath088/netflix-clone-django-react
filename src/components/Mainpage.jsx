@@ -1,41 +1,68 @@
-import All from "./All";
-import { Routes,Route,Navigate} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import '../css/Mainpage.css';
-import Addmovies from "./Addmovies";
+import Header from "./Header";
+import All from "./All";
 import Love from "./Love";
-import Details from "./Details";
-import Playvideo from "./Playvideo";
-import Modifymovie from "./Modifymovie";
 import Action from "./Action";
-import Logout from "./Logout";
 import Webseries from "./Webseries";
-function Mainpage(){
-    let isSuperuser = localStorage.getItem("isSuperuser") === 'true';
-    return(
-        <main className="mainpage">
-            <div className="page">
+import Moviedetails from "./Moviedetails";
+import Playvideo from "./Playvideo";
+import Addfilm from "./Addfilm";
+import Modifyfilm from "./Modifyfilm";
+import axios from "axios";
+
+function Mainpage() {
+  const isSuperuser = localStorage.getItem("isSuperuser") === 'true';
+  const [allMovies, setAllMovies] = useState([]); // full dataset
+  const [movies, setMovies] = useState([]);       // display dataset
+  const BASE_HOST = window.location.hostname.includes("127.0.0.1") || window.location.hostname.includes("localhost") 
+    ? "http://127.0.0.1:8000/mainapp" 
+    : "https://netflix-clone-backend-1-4ynr.onrender.com/mainapp";
+
+  useEffect(() => {
+    axios.get(`${BASE_HOST}/show/`)
+      .then(resp => {
+        setAllMovies(resp.data);
+        setMovies(resp.data);
+      })
+      .catch(() => {
+        setAllMovies([]);
+        setMovies([]);
+      });
+  }, [BASE_HOST]);
+
+  return (
+    <main className="mainpage">
+      {/* Pass allMovies & setMovies to Header */}
+      <Header allMovies={allMovies} setMovies={setMovies} />
+
+      <div className="page">
         <Routes>
-          < Route index element={<All/>} /> 
-          <Route path="all" element={<All/>} />
-          <Route path="love" element={<Love/>}/>
-          <Route path="playvideo" element={<Playvideo/>}/>
-          <Route path="action" element={<Action/>}/>
-          <Route path="webseries" element={<Webseries/>}/>
+          <Route index element={<All movies={movies} />} />
+          <Route path="all" element={<All movies={movies} />} />
+          <Route path="love" element={<Love movies={movies} />} />
+          <Route path="action" element={<Action movies={movies} />} />
+          <Route path="webseries" element={<Webseries movies={movies} />} />
+          <Route path="moviedetails" element={<Moviedetails movies={movies} allMovies={allMovies} setMovies={setMovies} />} />
+          <Route path="playvideo" element={<Playvideo />} />
+
           <Route
             path="add"
-            element={isSuperuser ? <Addmovies /> : <Navigate to="/app" />}
+            element={isSuperuser ? <Addfilm /> : <Navigate to="/app" />}
           />
           <Route
-            path="details/:movieid"
-            element={<Details />} 
+            path="modify"
+            element={isSuperuser ? <Modifyfilm /> : <Navigate to="/app" />}
           />
           <Route
             path="modify/:movieid"
-            element={isSuperuser ? <Modifymovie /> : <Navigate to="/app" />}
+            element={isSuperuser ? <Modifyfilm /> : <Navigate to="/app" />}
           />
         </Routes>
-            </div>
-       </main>
-    );
+      </div>
+    </main>
+  );
 }
+
 export default Mainpage;

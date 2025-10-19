@@ -1,21 +1,28 @@
 import { useLocation } from "react-router-dom";
-import '../css/Playvideo.css';
+import "../css/Playvideo.css";
 
 function Playvideo() {
   const location = useLocation();
-  const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
+
+  // Normalize Cloudinary video URL
+  const normalizeUrl = (url, type) => {
+    if (!url) return "";
+    if (url.startsWith(`${type}/upload/http`)) {
+      return url.replace(`${type}/upload/`, "");
+    }
+    if (url.startsWith("http")) return url;
+    return `https://res.cloudinary.com/dcguhkbhj/${url}`;
+  };
 
   if (!location.state?.url) return <p>No video found</p>;
 
   return (
     <div className="video">
       <video
-        src={location.state.url} // location.state.url already has HTTPS
+        src={normalizeUrl(location.state.url, "video")}
         autoPlay
         controls
       ></video>
-
-
     </div>
   );
 }

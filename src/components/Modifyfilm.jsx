@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../css/Modifymovie.css";
+import '../css/Modifyfilm.css'; // external CSS
 
-function Modifymovie() {
+function Modifyfilm() {
   const [movie, setMovie] = useState({
     movie_no: "",
     movie_name: "",
@@ -14,17 +14,30 @@ function Modifymovie() {
   const [searchId, setSearchId] = useState("");
   const { movieid } = useParams();
   const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
-  // Fetch movie by ID or name
-  const getMovie = useCallback(
-    (idOrName) => {
+  // Dynamic BASE_URL for local and production
+  const BASE_URL = (() => {
+    const host = window.location.hostname;
+    if (["127.0.0.1", "localhost"].includes(host)) {
+      return "http://127.0.0.1:8000/mainapp";
+    } else if (
+      host === "netflix-clone-django-react-swagaths-projects.vercel.app"
+    ) {
+      return "https://netflix-clone-backend-1-4ynr.onrender.com/mainapp";
+    } else {
+      return "https://netflix-clone-backend-1-4ynr.onrender.com/mainapp";
+    }
+  })();
+
+  // Fetch movie by ID or Name
+  const fetchMovie = useCallback(
+    (query) => {
+      if (!query) return;
       axios
-        .get(`${BASE_URL}/mainapp/get/${idOrName}/`)
+        .get(`${BASE_URL}/get/${query}/`)
         .then((resp) => {
-          const data = Array.isArray(resp.data) ? resp.data[0] : resp.data;
-          if (data) {
-            setMovie(data);
+          if (resp.data.length) {
+            setMovie(resp.data[0]);
           } else {
             alert("Movie not found!");
             setMovie({
@@ -36,27 +49,44 @@ function Modifymovie() {
             });
           }
         })
-        .catch(() => alert("No movie found with that ID or name!"));
+        .catch(() => {
+          alert("Movie not found!");
+          setMovie({
+            movie_no: "",
+            movie_name: "",
+            movie_desc: "",
+            movie_rating: "",
+            movie_image: "",
+          });
+        });
     },
     [BASE_URL]
   );
 
   useEffect(() => {
-    if (movieid) getMovie(movieid);
-  }, [movieid, getMovie]);
+    if (movieid) fetchMovie(movieid);
+  }, [movieid, fetchMovie]);
 
-  // Handle input changes
+  const handleSearch = () => {
+    const trimmed = searchId.trim();
+    if (!trimmed) return alert("Enter movie ID or Name");
+    fetchMovie(trimmed);
+    setSearchId("");
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") handleSearch();
+  };
+
   const handleChange = (e) => {
     setMovie({ ...movie, [e.target.name]: e.target.value });
   };
 
-  // Update movie
   const updateMovie = () => {
-    const id = movieid || movie.movie_no;
+    const id = movie.movie_no;
     if (!id) return alert("No movie selected!");
-
     axios
-      .put(`${BASE_URL}/mainapp/put/${id}/`, movie, {
+      .put(`${BASE_URL}/put/${id}/`, movie, {
         headers: { "Content-Type": "application/json" },
       })
       .then(() => alert("Movie updated successfully!"))
@@ -65,17 +95,14 @@ function Modifymovie() {
       );
   };
 
-  // Delete movie
   const deleteMovie = () => {
-    const id = movieid || movie.movie_no;
+    const id = movie.movie_no;
     if (!id) return alert("No movie selected!");
-
     if (window.confirm("Are you sure you want to delete this movie?")) {
       axios
-        .delete(`${BASE_URL}/mainapp/delete/${id}/`) // DELETE request
+        .delete(`${BASE_URL}/delete/${id}/`)
         .then(() => {
           alert("Movie deleted successfully!");
-          // Clear form
           setMovie({
             movie_no: "",
             movie_name: "",
@@ -83,8 +110,7 @@ function Modifymovie() {
             movie_rating: "",
             movie_image: "",
           });
-          // Navigate back to All Movies page
-          navigate("/all"); 
+          navigate("/app/all"); // ✅ fixed navigation after delete
         })
         .catch((err) =>
           alert("Delete failed: " + JSON.stringify(err.response?.data))
@@ -92,23 +118,8 @@ function Modifymovie() {
     }
   };
 
-  // Search movie
-  const handleSearch = () => {
-    if (searchId.trim()) {
-      getMovie(searchId);
-      setSearchId("");
-    } else {
-      alert("Please enter a movie ID or name to search.");
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") handleSearch();
-  };
-
   return (
     <div className="modify">
-      {/* Search bar */}
       <div className="search-bar">
         <input
           type="text"
@@ -123,18 +134,12 @@ function Modifymovie() {
         </button>
       </div>
 
-      {/* Preview image */}
       {movie.movie_image && (
         <div className="movie-preview">
-          <img
-              src={n.movie_image}
-              alt={n.movie_name}
-              width="200"
-          />
+          <img src={movie.movie_image} alt={movie.movie_name} width="200" />
         </div>
       )}
 
-      {/* Form fields */}
       <input
         type="number"
         name="movie_no"
@@ -142,6 +147,7 @@ function Modifymovie() {
         onChange={handleChange}
         placeholder="Movie No"
         className="desc"
+        disabled
       />
       <input
         type="text"
@@ -168,7 +174,6 @@ function Modifymovie() {
         className="desc"
       />
 
-      {/* Buttons */}
       <button onClick={updateMovie} className="update">
         Update Movie
       </button>
@@ -179,4 +184,4 @@ function Modifymovie() {
   );
 }
 
-export default Modifymovie;
+export default Modifyfilm;

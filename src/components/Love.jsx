@@ -1,40 +1,55 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/All.css"; // reuse All.css for styling
 
 function Love() {
-    const [data, setData] = useState([]);
-    const navigate = useNavigate();
-    const BASE_URL = import.meta.env.VITE_API_URL || "https://netflix-clone-backend-1-4ynr.onrender.com";
+  const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
-    useEffect(() => {
-        axios.get(`${BASE_URL}/mainapp/show/`)
-            .then(resp => {
-                const filtered = resp.data.filter(n => n.movie_name.toLowerCase().includes('love'));
-                setData(filtered);
-            })
-            .catch(err => {
-                console.log(err);
-                setData([]);
-            });
-    }, [BASE_URL]);
+  const fetchMovies = () => {
+    axios
+      .get(`${BASE_URL}/mainapp/show/`)
+      .then((resp) => {
+        const filtered = resp.data.filter(
+          (m) =>
+            (m.movie_name && m.movie_name.toLowerCase().includes("love")) ||
+            (m.movie_desc && m.movie_desc.toLowerCase().includes("love"))
+        );
+        setMovies(filtered);
+      })
+      .catch((err) => {
+        console.error(err);
+        setMovies([]);
+      });
+  };
 
-    return (
-        <div className="imageone">
-            {data.length === 0 && <p>No love movies found</p>}
-            {data.map(n => (
-                <div key={n.id}>
-                    <img
-                    src={n.movie_image}
-                    alt={n.movie_name}
-                    width="200"
-                        onClick={() => navigate('/app/playvideo', { state: { url: n.movie_video } })}
-                    />
-                    <p>{n.movie_name}</p>
-                </div>
-            ))}
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+
+  return (
+    <div className="imageone">
+      {movies.length === 0 && <p>No love movies found</p>}
+      {movies.map((movie) => (
+        <div key={movie.movie_no || movie.id} className="movie-card">
+          <img
+            src={movie.movie_image_url || movie.movie_image}
+            alt={movie.movie_name || "Love Movie"}
+            width="200"
+            className="movie-image"
+            onClick={() =>
+              navigate("/app/playvideo", {
+                state: { url: movie.movie_video_url || movie.movie_video },
+              })
+            }
+          />
+          <p>{movie.movie_name}</p>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
 
 export default Love;

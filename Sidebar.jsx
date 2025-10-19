@@ -11,11 +11,18 @@ function Sidebar({ user }) {
         <li><Link to='/app/love' className='sidebar-btn'>Love films</Link></li>
         <li><Link to='/app/action' className='sidebar-btn'>Action </Link></li>
         <li><Link to='/app/webseries' className='sidebar-btn'>web series</Link></li>
-        <li><Link to='/app/details/1' className='sidebar-btn '>Movie <br />details</Link></li>
+        <li><Link to='/app/moviedetails' className='sidebar-btn'>Movie<br/>details</Link></li>
+
+
         {user?.is_superuser && (
           <>
-            <li><Link to='/app/add' className='sidebar-btn '>Add</Link></li>
-            <li><Link to='/app/modify/1' className='sidebar-btn '>Modify</Link></li>
+            <li><Link to='/app/add' className='sidebar-btn '>Add film</Link></li>
+            <li>
+            <Link to={`/app/modify/${movie.movie_no}`} className="sidebar-btn">
+              Modify <br /> film
+            </Link>
+          </li>
+
           </>
         )}
       </ul>

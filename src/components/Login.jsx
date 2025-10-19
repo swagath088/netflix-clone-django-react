@@ -36,7 +36,7 @@ function Login({ setUser }) {
             setUser(userData);
         })
         .catch(err => console.log(err));
-        console.log("BASE_URL:", BASE_URL); // <--- Add this line temporarily
+
     };
 
     return (
